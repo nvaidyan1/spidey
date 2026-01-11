@@ -1,0 +1,99 @@
+# Procedural World Configuration
+# ==============================
+# Adjust these parameters without touching code
+
+window:
+  width: 1280
+  height: 720
+  title: "Procedural World"
+  vsync: true
+
+camera:
+  start_position: [0.0, 80.0, 0.0]
+  start_yaw: -90.0      # degrees
+  start_pitch: -15.0    # degrees
+  fov: 70.0             # degrees
+  near_clip: 0.1
+  far_clip: 1000.0
+  move_speed: 30.0      # units per second
+  sprint_multiplier: 3.0
+  mouse_sensitivity: 0.1
+
+terrain:
+  chunk_size: 24        # vertices per side (24x24 grid)
+  world_scale: 2.5      # distance between vertices
+  height_scale: 40.0    # max terrain height
+  noise_scale: 0.008    # smaller = larger features
+  view_distance: 3      # chunks in each direction (3 = 7x7 grid)
+  
+  # Noise parameters
+  noise_octaves: 4      # detail layers (more = slower)
+  noise_lacunarity: 2.0 # frequency multiplier per octave
+  noise_persistence: 0.5 # amplitude multiplier per octave
+
+lighting:
+  # Sun direction (will be normalized)
+  sun_direction: [0.6, 0.8, 0.4]
+  
+  # Ambient light strength
+  ambient_strength: 0.4
+  
+  # Diffuse light strength
+  diffuse_strength: 0.6
+
+fog:
+  enabled: true
+  color: [0.7, 0.8, 0.9]
+  density: 0.004        # 0 = no fog, 0.01 = heavy fog
+  start_distance: 150.0 # fog begins fading in here
+
+sky:
+  color: [0.5, 0.7, 0.9]
+
+colors:
+  # Height-based terrain coloring
+  # Each entry: [max_height_normalized, [r, g, b]]
+  # Heights are 0.0 (lowest) to 1.0 (highest)
+  gradient:
+    - height: 0.25
+      flat: [0.15, 0.35, 0.1]    # dark green (valleys)
+      steep: [0.15, 0.35, 0.1]
+    - height: 0.45
+      flat: [0.25, 0.45, 0.15]   # grass green
+      steep: [0.25, 0.45, 0.15]
+    - height: 0.65
+      flat: [0.35, 0.45, 0.2]    # light green
+      steep: [0.45, 0.4, 0.3]    # tan/rock
+    - height: 0.8
+      flat: [0.5, 0.48, 0.45]    # rock gray
+      steep: [0.5, 0.48, 0.45]
+    - height: 1.0
+      flat: [0.65, 0.63, 0.6]    # peak gray
+      steep: [0.65, 0.63, 0.6]
+
+# Spider configuration (for Phase 2)
+spider:
+  body_height: 2.0      # height above ground
+  body_length: 3.0
+  body_width: 2.0
+  leg_length: 4.0       # total leg length
+  leg_segments: 3       # number of segments per leg
+  
+  # Movement
+  move_speed: 10.0
+  turn_speed: 2.0
+  
+  # Stepping parameters
+  step_height: 1.5      # how high legs lift
+  step_duration: 0.15   # seconds per step
+  step_threshold: 2.0   # distance before leg must step
+  
+  # Gait
+  gait_groups:          # legs that move together
+    - [0, 2, 5, 7]      # front-left, back-left, front-right, back-right
+    - [1, 3, 4, 6]      # alternating set
+
+debug:
+  show_fps: false
+  wireframe: false
+  show_chunk_borders: false
